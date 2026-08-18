@@ -217,7 +217,7 @@ a{color:inherit}
     font-size:0.94rem;font-weight:600;color:var(--body);text-decoration:none;
     transition:background 200ms var(--ease), color 200ms var(--ease);
   }
-  .nav-desktop a:hover{background:var(--surface-tint);color:var(--ink)}
+  .nav-desktop a:hover,.nav-desktop a:focus-visible{background:var(--surface-tint);color:var(--gold)}
 }
 .header-cta{display:none}
 @media (min-width:920px){.header-cta{display:inline-flex}}
@@ -252,7 +252,9 @@ a{color:inherit}
 .mobile-menu a{
   display:block;padding:16px 4px;font-size:1.3rem;font-weight:700;font-family:var(--font-display);
   color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border-soft);
+  transition:color 200ms var(--ease), border-color 200ms var(--ease);
 }
+.mobile-menu a:hover,.mobile-menu a:active,.mobile-menu a:focus-visible{color:var(--gold);border-bottom-color:var(--gold)}
 .header-cta.desktop-inline{display:inline-flex}
 
 /* ============ HERO ============ */
@@ -363,6 +365,13 @@ a{color:inherit}
 .reveal{opacity:0;transform:translateY(18px);transition:opacity 640ms var(--ease), transform 640ms var(--ease)}
 .reveal.is-visible{opacity:1;transform:translateY(0)}
 .reveal-stagger.is-visible > *{transition-delay:calc(var(--i,0) * 70ms)}
+
+.text-split .tr-word{
+  display:inline-block;opacity:0;transform:translateY(10px);filter:blur(6px);
+  transition:opacity 560ms var(--ease), transform 560ms var(--ease), filter 560ms var(--ease);
+  transition-delay:calc(var(--i,0) * 45ms);
+}
+.reveal.is-visible .text-split .tr-word{opacity:1;transform:translateY(0);filter:blur(0)}
 
 /* ============ PROBLEM ============ */
 .section-tint{background:var(--surface-tint)}
@@ -726,7 +735,7 @@ html{scroll-behavior:smooth}
     <div class="wrap hero-grid">
       <div class="hero-copy reveal">
         <span class="badge">Sistema de comandas para comida e bebida</span>
-        <h1 class="h1">Seu atendimento mais rápido.<br>Sua operação mais organizada.</h1>
+        <h1 class="h1 text-split">Seu atendimento mais rápido.<br>Sua operação mais organizada.</h1>
         <p class="lede">A Comanda Beach ajuda seu negócio a organizar pedidos, agilizar o atendimento e ter mais controle sobre a operação — do primeiro pedido até a entrega.</p>
         <div class="hero-ctas">
           <a class="btn btn-primary" href="#oferta">
@@ -769,7 +778,7 @@ html{scroll-behavior:smooth}
     <div class="wrap">
       <div class="section-head reveal">
         <span class="eyebrow">O desafio</span>
-        <h2 class="h2" style="margin-top:10px">Quando os pedidos se acumulam, qualquer desorganização custa caro.</h2>
+        <h2 class="h2 text-split" style="margin-top:10px">Quando os pedidos se acumulam, qualquer desorganização custa caro.</h2>
         <p class="lede" style="margin-top:16px">Em uma operação de alimentação e bebidas, cada pedido importa. Quanto maior o movimento, maior a necessidade de organização, agilidade e comunicação.</p>
       </div>
 
@@ -807,7 +816,7 @@ html{scroll-behavior:smooth}
     <div class="wrap">
       <div class="section-head center reveal">
         <span class="eyebrow">A solução</span>
-        <h2 class="h2" style="margin-top:10px">Conheça a Comanda Beach.</h2>
+        <h2 class="h2 text-split" style="margin-top:10px">Conheça a Comanda Beach.</h2>
         <p class="lede" style="margin:16px auto 0">Uma solução criada para facilitar o gerenciamento de pedidos de comidas e bebidas, ajudando sua equipe a trabalhar com mais organização e proporcionando uma experiência mais eficiente para seus clientes.</p>
       </div>
 
@@ -840,7 +849,7 @@ html{scroll-behavior:smooth}
     <div class="wrap">
       <div class="section-head reveal">
         <span class="eyebrow">Benefícios</span>
-        <h2 class="h2" style="margin-top:10px">Tudo o que sua operação precisa para atender melhor.</h2>
+        <h2 class="h2 text-split" style="margin-top:10px">Tudo o que sua operação precisa para atender melhor.</h2>
       </div>
 
       <div class="benefits-grid reveal reveal-stagger">
@@ -887,7 +896,7 @@ html{scroll-behavior:smooth}
     <div class="wrap">
       <div class="section-head center reveal">
         <span class="eyebrow">A transformação</span>
-        <h2 class="h2" style="margin-top:10px">Troque a complexidade por uma operação mais inteligente.</h2>
+        <h2 class="h2 text-split" style="margin-top:10px">Troque a complexidade por uma operação mais inteligente.</h2>
       </div>
 
       <div class="ba-wrap reveal">
@@ -924,7 +933,7 @@ html{scroll-behavior:smooth}
     <div class="wrap">
       <div class="section-head center reveal">
         <span class="eyebrow">Como funciona</span>
-        <h2 class="h2" style="margin-top:10px">Simples para sua equipe. Melhor para seu cliente.</h2>
+        <h2 class="h2 text-split" style="margin-top:10px">Simples para sua equipe. Melhor para seu cliente.</h2>
       </div>
 
       <div class="timeline reveal reveal-stagger">
@@ -965,7 +974,7 @@ html{scroll-behavior:smooth}
     <div class="wrap">
       <div class="section-head center reveal">
         <span class="eyebrow">Para quem é</span>
-        <h2 class="h2" style="margin-top:10px">Um sistema para diferentes tipos de operação.</h2>
+        <h2 class="h2 text-split" style="margin-top:10px">Um sistema para diferentes tipos de operação.</h2>
       </div>
 
       <div class="audience-grid reveal reveal-stagger">
@@ -990,7 +999,7 @@ html{scroll-behavior:smooth}
     <div class="wrap">
       <div class="section-head center reveal">
         <span class="eyebrow">O diferencial</span>
-        <h2 class="h2" style="margin-top:10px">Mais do que uma comanda. Uma experiência melhor para toda a operação.</h2>
+        <h2 class="h2 text-split" style="margin-top:10px">Mais do que uma comanda. Uma experiência melhor para toda a operação.</h2>
       </div>
 
       <div class="pillars reveal reveal-stagger">
@@ -1026,7 +1035,7 @@ html{scroll-behavior:smooth}
     <div class="wrap">
       <div class="section-head center reveal">
         <span class="eyebrow">Prova social</span>
-        <h2 class="h2" style="margin-top:10px">Quem organiza melhor, atende melhor.</h2>
+        <h2 class="h2 text-split" style="margin-top:10px">Quem organiza melhor, atende melhor.</h2>
       </div>
 
       <div class="testi-grid reveal reveal-stagger">
@@ -1074,7 +1083,7 @@ html{scroll-behavior:smooth}
     <div class="wrap">
       <div class="section-head center reveal">
         <span class="eyebrow">Oferta</span>
-        <h2 class="h2" style="margin-top:10px">Pronto para simplificar sua operação?</h2>
+        <h2 class="h2 text-split" style="margin-top:10px">Pronto para simplificar sua operação?</h2>
       </div>
 
       <div class="offer-card reveal">
@@ -1106,7 +1115,7 @@ html{scroll-behavior:smooth}
     <div class="wrap">
       <div class="section-head center reveal">
         <span class="eyebrow">Dúvidas comuns</span>
-        <h2 class="h2" style="margin-top:10px">Ainda tem alguma dúvida?</h2>
+        <h2 class="h2 text-split" style="margin-top:10px">Ainda tem alguma dúvida?</h2>
       </div>
 
       <div class="obj-grid reveal reveal-stagger">
@@ -1143,7 +1152,7 @@ html{scroll-behavior:smooth}
     <div class="wrap">
       <div class="section-head center reveal">
         <span class="eyebrow">FAQ</span>
-        <h2 class="h2" style="margin-top:10px">Perguntas frequentes.</h2>
+        <h2 class="h2 text-split" style="margin-top:10px">Perguntas frequentes.</h2>
       </div>
 
       <div class="acc reveal" style="max-width:820px;margin-inline:auto">
@@ -1167,7 +1176,7 @@ html{scroll-behavior:smooth}
   <!-- CTA FINAL -->
   <section class="section final-cta">
     <div class="wrap reveal">
-      <h2 class="h2">Sua operação pode ser mais simples.</h2>
+      <h2 class="h2 text-split">Sua operação pode ser mais simples.</h2>
       <p class="lede">Organize seus pedidos, agilize seu atendimento e ofereça uma experiência melhor para seus clientes.</p>
       <a class="btn btn-on-dark" href="[LINK DO CHECKOUT KIWIFY]">
         Quero conhecer a Comanda Beach
@@ -1211,6 +1220,23 @@ html{scroll-behavior:smooth}
 
 <script>
 (function(){
+  document.querySelectorAll('.text-split').forEach(function(el){
+    var lines = el.innerHTML.split(/<br\s*\/?>/i).map(function(l){ return l.trim(); });
+    var i = 0;
+    var html = '<span class="visually-hidden">' + lines.join(' ') + '</span><span aria-hidden="true">';
+    lines.forEach(function(line, li){
+      var words = line.split(/\s+/).filter(Boolean);
+      words.forEach(function(word, wi){
+        html += '<span class="tr-word" style="--i:' + i + '">' + word + '</span>';
+        i++;
+        if(wi < words.length - 1) html += ' ';
+      });
+      if(li < lines.length - 1) html += '<br aria-hidden="true">';
+    });
+    html += '</span>';
+    el.innerHTML = html;
+  });
+
   var header = document.getElementById('siteHeader');
   var onScroll = function(){
     if(window.scrollY > 8){ header.classList.add('is-scrolled'); }
