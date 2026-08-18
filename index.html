@@ -283,8 +283,7 @@ a{color:inherit}
 .hero-micro strong{color:var(--ink);font-weight:600}
 
 /* --- hero visual mockup --- */
-.hero-visual{position:relative;isolation:isolate;perspective:1200px}
-.hero-tilt{position:relative;will-change:transform}
+.hero-visual{position:relative;isolation:isolate;will-change:transform}
 .hero-visual::before{
   content:"";position:absolute;z-index:-1;inset:-18% -16%;
   background:radial-gradient(55% 55% at 58% 42%, rgba(0,184,169,.45), transparent 70%);
@@ -752,7 +751,6 @@ html{scroll-behavior:smooth}
       </div>
 
       <div class="hero-visual reveal" style="transition-delay:120ms">
-        <div class="hero-tilt">
         <div class="device">
           <div class="device-bar">
             <div class="device-dots"><i></i><i></i><i></i></div>
@@ -768,7 +766,6 @@ html{scroll-behavior:smooth}
         <div class="float-card float-2" aria-hidden="true">
           <div class="ico"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5 9 17l11-11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <div><div class="num">Tudo em um lugar</div><div class="lbl">Mesas, cardápio e comandas</div></div>
-        </div>
         </div>
         <span class="hero-accent hero-accent-orange" aria-hidden="true"></span>
         <span class="hero-accent hero-accent-teal" aria-hidden="true"></span>
@@ -1264,7 +1261,7 @@ html{scroll-behavior:smooth}
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  var heroTilt = document.querySelector('.hero-tilt');
+  var heroTilt = document.querySelector('.hero-visual');
   if(heroTilt && !reduce){
     var heroMobile = window.innerWidth <= 768;
     var heroTicking = false;
@@ -1278,7 +1275,7 @@ html{scroll-behavior:smooth}
       var scaleTo = heroMobile ? 0.9 : 1;
       var scale = scaleFrom + (scaleTo - scaleFrom) * p;
       var translateY = (heroMobile ? -24 : -60) * p;
-      heroTilt.style.transform = 'rotateX(' + rotateX + 'deg) scale(' + scale + ') translateY(' + translateY + 'px)';
+      heroTilt.style.transform = 'perspective(1200px) rotateX(' + rotateX + 'deg) scale(' + scale + ') translateY(' + translateY + 'px)';
       heroTicking = false;
     };
     var requestHeroTiltUpdate = function(){
