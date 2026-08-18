@@ -283,7 +283,8 @@ a{color:inherit}
 .hero-micro strong{color:var(--ink);font-weight:600}
 
 /* --- hero visual mockup --- */
-.hero-visual{position:relative;isolation:isolate}
+.hero-visual{position:relative;isolation:isolate;perspective:1200px}
+.hero-tilt{position:relative;will-change:transform}
 .hero-visual::before{
   content:"";position:absolute;z-index:-1;inset:-18% -16%;
   background:radial-gradient(55% 55% at 58% 42%, rgba(0,184,169,.45), transparent 70%);
@@ -751,6 +752,7 @@ html{scroll-behavior:smooth}
       </div>
 
       <div class="hero-visual reveal" style="transition-delay:120ms">
+        <div class="hero-tilt">
         <div class="device">
           <div class="device-bar">
             <div class="device-dots"><i></i><i></i><i></i></div>
@@ -766,6 +768,7 @@ html{scroll-behavior:smooth}
         <div class="float-card float-2" aria-hidden="true">
           <div class="ico"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5 9 17l11-11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <div><div class="num">Tudo em um lugar</div><div class="lbl">Mesas, cardápio e comandas</div></div>
+        </div>
         </div>
         <span class="hero-accent hero-accent-orange" aria-hidden="true"></span>
         <span class="hero-accent hero-accent-teal" aria-hidden="true"></span>
@@ -1260,6 +1263,35 @@ html{scroll-behavior:smooth}
   menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var heroTilt = document.querySelector('.hero-tilt');
+  if(heroTilt && !reduce){
+    var heroMobile = window.innerWidth <= 768;
+    var heroTicking = false;
+    var updateHeroTilt = function(){
+      var rect = heroTilt.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var p = (vh - rect.top) / (vh + rect.height);
+      p = Math.min(Math.max(p, 0), 1);
+      var rotateX = 20 - 20 * p;
+      var scaleFrom = heroMobile ? 0.7 : 1.05;
+      var scaleTo = heroMobile ? 0.9 : 1;
+      var scale = scaleFrom + (scaleTo - scaleFrom) * p;
+      var translateY = (heroMobile ? -24 : -60) * p;
+      heroTilt.style.transform = 'rotateX(' + rotateX + 'deg) scale(' + scale + ') translateY(' + translateY + 'px)';
+      heroTicking = false;
+    };
+    var requestHeroTiltUpdate = function(){
+      if(!heroTicking){ requestAnimationFrame(updateHeroTilt); heroTicking = true; }
+    };
+    window.addEventListener('scroll', requestHeroTiltUpdate, {passive:true});
+    window.addEventListener('resize', function(){
+      heroMobile = window.innerWidth <= 768;
+      requestHeroTiltUpdate();
+    }, {passive:true});
+    updateHeroTilt();
+  }
+
   if('IntersectionObserver' in window && !reduce){
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
