@@ -1139,7 +1139,7 @@ html{scroll-behavior:smooth}
             <div class="cond">[FORMA DE PAGAMENTO]</div>
           </div>
 
-          <a class="btn btn-primary btn-block offer-cta" href="[LINK DO CHECKOUT KIWIFY]">
+          <a class="btn btn-primary btn-block offer-cta" href="#">
             Quero começar agora
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
@@ -1216,7 +1216,7 @@ html{scroll-behavior:smooth}
     <div class="wrap reveal">
       <h2 class="h2 text-split">Sua operação pode ser mais simples.</h2>
       <p class="lede">Organize seus pedidos, agilize seu atendimento e ofereça uma experiência melhor para seus clientes.</p>
-      <a class="btn btn-on-dark" href="[LINK DO CHECKOUT KIWIFY]">
+      <a class="btn btn-on-dark" href="#">
         Quero conhecer a Comanda Beach
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
@@ -1298,6 +1298,12 @@ html{scroll-behavior:smooth}
   menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll('.offer-cta, .final-cta .btn').forEach(function(a){
+    if(a.getAttribute('href') === '#'){
+      a.addEventListener('click', function(e){ e.preventDefault(); });
+    }
+  });
 
   var offerCta = document.querySelector('.offer-cta');
   if(offerCta && !reduce){
