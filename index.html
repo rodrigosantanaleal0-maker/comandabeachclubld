@@ -418,15 +418,18 @@ a{color:inherit}
 }
 
 /* ============ BENEFITS ============ */
-.benefits-grid{display:grid;gap:18px;grid-template-columns:1fr}
-@media (min-width:640px){.benefits-grid{grid-template-columns:1fr 1fr}}
-@media (min-width:1080px){.benefits-grid{grid-template-columns:repeat(3,1fr)}}
+.benefits-grid{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.benefits-track{display:flex;width:max-content;animation:benefits-marquee 34s linear infinite}
+.benefits-track:hover{animation-play-state:paused}
+.benefits-set{display:flex;gap:18px;padding-right:18px}
+@keyframes benefits-marquee{to{transform:translateX(-50%)}}
 .benefit-card{
-  position:relative;overflow:hidden;
+  position:relative;overflow:hidden;flex:0 0 260px;
   background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius-md);
   padding:28px 24px;box-shadow:var(--shadow-sm);
   transition:transform 260ms var(--ease), box-shadow 260ms var(--ease), border-color 260ms var(--ease);
 }
+@media (min-width:640px){.benefit-card{flex-basis:280px}}
 .benefit-card::before{
   content:"";position:absolute;top:0;left:0;right:0;height:3px;
   background:linear-gradient(90deg,var(--teal),var(--gold));
@@ -721,6 +724,9 @@ a{color:inherit}
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:0.001ms !important;animation-iteration-count:1 !important;transition-duration:0.001ms !important;scroll-behavior:auto !important}
   .reveal{opacity:1;transform:none}
+  .benefits-grid{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
+  .benefits-track{animation:none !important;transform:none !important}
+  .benefits-set[aria-hidden]{display:none}
 }
 html{scroll-behavior:smooth}
 ::selection{background:rgba(0,184,169,0.28)}
@@ -921,36 +927,72 @@ html{scroll-behavior:smooth}
         <h2 class="h2 text-split" style="margin-top:10px">Tudo o que sua operação precisa para atender melhor.</h2>
       </div>
 
-      <div class="benefits-grid reveal reveal-stagger">
-        <div class="benefit-card" style="--i:0">
-          <div class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 3 14h7l-1 8 11-14h-7l1-6Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
-          <h3>Mais agilidade</h3>
-          <p>Torne o processo de atendimento mais rápido e eficiente.</p>
-        </div>
-        <div class="benefit-card" style="--i:1">
-          <div class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M8 3h8M7 7h10M6 11h12l-1.2 8.4a2 2 0 0 1-2 1.6H9.2a2 2 0 0 1-2-1.6L6 11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
-          <h3>Mais organização</h3>
-          <p>Tenha os pedidos mais organizados e facilite o trabalho da equipe.</p>
-        </div>
-        <div class="benefit-card" style="--i:2">
-          <div class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3 4 6.5v5C4 16.5 7.5 20.5 12 22c4.5-1.5 8-5.5 8-10.5v-5L12 3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <h3>Menos erros</h3>
-          <p>Reduza falhas causadas por informações desencontradas.</p>
-        </div>
-        <div class="benefit-card" style="--i:3">
-          <div class="mark"><svg viewBox="0 0 24 24" fill="none"><circle cx="8.5" cy="8" r="3.2" stroke="currentColor" stroke-width="1.8"/><path d="M2.5 20v-.8A4.7 4.7 0 0 1 7.2 14.5h2.6A4.7 4.7 0 0 1 14.5 19.2V20M15.5 5a3.2 3.2 0 0 1 0 6.3M17 14.6a4.7 4.7 0 0 1 4.5 4.7V20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-          <h3>Equipe mais produtiva</h3>
-          <p>Ajude sua equipe a trabalhar de forma mais eficiente.</p>
-        </div>
-        <div class="benefit-card" style="--i:4">
-          <div class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.35-9.5-8.5C.7 8.9 2.6 5 6.2 5 8.4 5 10 6.3 12 8.5 14 6.3 15.6 5 17.8 5c3.6 0 5.5 3.9 3.7 7.5C19 16.65 12 21 12 21Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
-          <h3>Melhor experiência</h3>
-          <p>Ofereça aos seus clientes um atendimento mais fluido e profissional.</p>
-        </div>
-        <div class="benefit-card" style="--i:5">
-          <div class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V10M11 20V4M18 20v-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-          <h3>Mais controle</h3>
-          <p>Tenha uma operação mais preparada para acompanhar o movimento.</p>
+      <div class="benefits-grid reveal">
+        <div class="benefits-track">
+          <div class="benefits-set">
+            <div class="benefit-card">
+              <div class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 3 14h7l-1 8 11-14h-7l1-6Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+              <h3>Mais agilidade</h3>
+              <p>Torne o processo de atendimento mais rápido e eficiente.</p>
+            </div>
+            <div class="benefit-card">
+              <div class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M8 3h8M7 7h10M6 11h12l-1.2 8.4a2 2 0 0 1-2 1.6H9.2a2 2 0 0 1-2-1.6L6 11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+              <h3>Mais organização</h3>
+              <p>Tenha os pedidos mais organizados e facilite o trabalho da equipe.</p>
+            </div>
+            <div class="benefit-card">
+              <div class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3 4 6.5v5C4 16.5 7.5 20.5 12 22c4.5-1.5 8-5.5 8-10.5v-5L12 3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <h3>Menos erros</h3>
+              <p>Reduza falhas causadas por informações desencontradas.</p>
+            </div>
+            <div class="benefit-card">
+              <div class="mark"><svg viewBox="0 0 24 24" fill="none"><circle cx="8.5" cy="8" r="3.2" stroke="currentColor" stroke-width="1.8"/><path d="M2.5 20v-.8A4.7 4.7 0 0 1 7.2 14.5h2.6A4.7 4.7 0 0 1 14.5 19.2V20M15.5 5a3.2 3.2 0 0 1 0 6.3M17 14.6a4.7 4.7 0 0 1 4.5 4.7V20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+              <h3>Equipe mais produtiva</h3>
+              <p>Ajude sua equipe a trabalhar de forma mais eficiente.</p>
+            </div>
+            <div class="benefit-card">
+              <div class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.35-9.5-8.5C.7 8.9 2.6 5 6.2 5 8.4 5 10 6.3 12 8.5 14 6.3 15.6 5 17.8 5c3.6 0 5.5 3.9 3.7 7.5C19 16.65 12 21 12 21Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+              <h3>Melhor experiência</h3>
+              <p>Ofereça aos seus clientes um atendimento mais fluido e profissional.</p>
+            </div>
+            <div class="benefit-card">
+              <div class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V10M11 20V4M18 20v-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+              <h3>Mais controle</h3>
+              <p>Tenha uma operação mais preparada para acompanhar o movimento.</p>
+            </div>
+          </div>
+          <div class="benefits-set" aria-hidden="true">
+            <div class="benefit-card">
+              <div class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 3 14h7l-1 8 11-14h-7l1-6Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+              <h3>Mais agilidade</h3>
+              <p>Torne o processo de atendimento mais rápido e eficiente.</p>
+            </div>
+            <div class="benefit-card">
+              <div class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M8 3h8M7 7h10M6 11h12l-1.2 8.4a2 2 0 0 1-2 1.6H9.2a2 2 0 0 1-2-1.6L6 11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+              <h3>Mais organização</h3>
+              <p>Tenha os pedidos mais organizados e facilite o trabalho da equipe.</p>
+            </div>
+            <div class="benefit-card">
+              <div class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3 4 6.5v5C4 16.5 7.5 20.5 12 22c4.5-1.5 8-5.5 8-10.5v-5L12 3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <h3>Menos erros</h3>
+              <p>Reduza falhas causadas por informações desencontradas.</p>
+            </div>
+            <div class="benefit-card">
+              <div class="mark"><svg viewBox="0 0 24 24" fill="none"><circle cx="8.5" cy="8" r="3.2" stroke="currentColor" stroke-width="1.8"/><path d="M2.5 20v-.8A4.7 4.7 0 0 1 7.2 14.5h2.6A4.7 4.7 0 0 1 14.5 19.2V20M15.5 5a3.2 3.2 0 0 1 0 6.3M17 14.6a4.7 4.7 0 0 1 4.5 4.7V20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+              <h3>Equipe mais produtiva</h3>
+              <p>Ajude sua equipe a trabalhar de forma mais eficiente.</p>
+            </div>
+            <div class="benefit-card">
+              <div class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.35-9.5-8.5C.7 8.9 2.6 5 6.2 5 8.4 5 10 6.3 12 8.5 14 6.3 15.6 5 17.8 5c3.6 0 5.5 3.9 3.7 7.5C19 16.65 12 21 12 21Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+              <h3>Melhor experiência</h3>
+              <p>Ofereça aos seus clientes um atendimento mais fluido e profissional.</p>
+            </div>
+            <div class="benefit-card">
+              <div class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V10M11 20V4M18 20v-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+              <h3>Mais controle</h3>
+              <p>Tenha uma operação mais preparada para acompanhar o movimento.</p>
+            </div>
+          </div>
         </div>
       </div>
 
