@@ -543,6 +543,32 @@ a{color:inherit}
 .section-dark{background:var(--charcoal);color:#EDEDED}
 .section-dark .h2, .section-dark h3{color:#fff}
 .section-dark .eyebrow{color:var(--sand)}
+
+/* ============ LAMP EFFECT ============ */
+.lamp-band{
+  position:relative;overflow:hidden;background:var(--charcoal);
+  padding-block:clamp(64px,9vw,100px) clamp(48px,7vw,72px);
+  margin-bottom:clamp(48px,7vw,72px);
+}
+.lamp-band .eyebrow{color:var(--sand)}
+.lamp-band .h2{color:#fff}
+.lamp-band .wrap{position:relative;z-index:1}
+.lamp-glow{
+  position:absolute;top:-20%;width:55%;height:140%;
+  background:radial-gradient(ellipse 60% 55% at 50% 0%, rgba(0,184,169,.65), rgba(0,184,169,.12) 45%, transparent 72%);
+  filter:blur(6px);pointer-events:none;opacity:0;
+}
+.lamp-glow-l{left:-18%;transform:rotate(-14deg)}
+.lamp-glow-r{right:-18%;transform:rotate(14deg)}
+.lamp-band.is-visible .lamp-glow{animation:lamp-fade 1400ms var(--ease) 200ms forwards}
+@keyframes lamp-fade{to{opacity:1}}
+.lamp-line{
+  position:absolute;top:0;left:50%;translate:-50% 0;height:3px;width:0;
+  background:var(--teal);border-radius:999px;
+  box-shadow:0 0 24px 4px rgba(0,184,169,.85), 0 0 60px 12px rgba(0,184,169,.4);
+}
+.lamp-band.is-visible .lamp-line{animation:lamp-line-grow 1100ms var(--ease) 400ms forwards}
+@keyframes lamp-line-grow{to{width:min(320px,60%)}}
 .pillars{display:grid;gap:16px;grid-template-columns:1fr;margin-bottom:clamp(40px,6vw,64px)}
 @media (min-width:760px){.pillars{grid-template-columns:repeat(3,1fr)}}
 .pillar{
@@ -1210,12 +1236,19 @@ html{scroll-behavior:smooth}
 
   <!-- OFERTA -->
   <section class="section" id="oferta">
-    <div class="wrap">
-      <div class="section-head center reveal">
-        <span class="eyebrow">Oferta</span>
-        <h2 class="h2 text-split" style="margin-top:10px">Pronto para simplificar sua operação?</h2>
+    <div class="lamp-band reveal">
+      <div class="lamp-glow lamp-glow-l" aria-hidden="true"></div>
+      <div class="lamp-glow lamp-glow-r" aria-hidden="true"></div>
+      <div class="lamp-line" aria-hidden="true"></div>
+      <div class="wrap">
+        <div class="section-head center reveal">
+          <span class="eyebrow">Oferta</span>
+          <h2 class="h2 text-split" style="margin-top:10px">Pronto para simplificar sua operação?</h2>
+        </div>
       </div>
+    </div>
 
+    <div class="wrap">
       <div class="offer-card reveal">
         <div class="offer-top">
           <span class="eyebrow">Comanda Beach</span>
