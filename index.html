@@ -518,18 +518,25 @@ a{color:inherit}
 .tl-body h3{font-size:1.02rem;margin-bottom:6px}
 .tl-body p{font-size:0.9rem;color:var(--muted)}
 
-/* ============ FOR WHOM ============ */
-.audience-grid{display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}
-@media (min-width:640px){.audience-grid{grid-template-columns:repeat(3,1fr)}}
-@media (min-width:980px){.audience-grid{grid-template-columns:repeat(5,1fr)}}
+/* ============ FOR WHOM — CIRCULAR CAROUSEL ============ */
+.cc-wrap{position:relative;outline:none}
+.cc-track{position:relative;height:200px;max-width:920px;margin:0 auto;overflow:hidden}
 .audience-chip{
+  width:132px;
   display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;
   background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius-md);
-  padding:22px 14px;transition:border-color 220ms var(--ease), transform 220ms var(--ease);
+  padding:22px 14px;transition:border-color 220ms var(--ease);
 }
-.audience-chip:hover{border-color:var(--teal);transform:translateY(-3px)}
-.audience-chip .ico{width:38px;height:38px;color:var(--teal-strong)}
+.cc-item{
+  position:absolute;left:50%;top:50%;cursor:pointer;
+  transition:transform 550ms var(--ease), opacity 550ms var(--ease);
+}
+.cc-item:hover{border-color:var(--teal)}
+.audience-chip .ico{width:38px;height:38px;color:var(--teal-strong);flex:none}
 .audience-chip span{font-size:0.84rem;font-weight:700;color:var(--ink)}
+.cc-dots{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:20px}
+.cc-dot{width:8px;height:8px;border-radius:50%;background:var(--border);border:none;padding:0;cursor:pointer;transition:background 220ms var(--ease), transform 220ms var(--ease)}
+.cc-dot.is-active{background:var(--teal);transform:scale(1.35)}
 .audience-note{text-align:center;max-width:56ch;margin:clamp(30px,4vw,46px) auto 0;color:var(--muted)}
 
 /* ============ DIFFERENTIATOR (dark) ============ */
@@ -1088,17 +1095,31 @@ html{scroll-behavior:smooth}
         <h2 class="h2 text-split" style="margin-top:10px">Um sistema para diferentes tipos de operação.</h2>
       </div>
 
-      <div class="audience-grid reveal reveal-stagger">
-        <div class="audience-chip" style="--i:0"><svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M6 2v8M4 2v4a2 2 0 0 0 4 0V2M8 2v20M18 2c-2 2-2 6-2 8 0 1 1 2 2 2s2-1 2-2V2v20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Restaurantes</span></div>
-        <div class="audience-chip" style="--i:1"><svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M5 3h14l-2 9a5 5 0 0 1-10 0L5 3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 15v6M8 21h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Bares</span></div>
-        <div class="audience-chip" style="--i:2"><svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M2 20c2-2 4-2 6 0s4 2 6 0 4-2 6 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M6 20V9l12-4v15" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Beach Clubs</span></div>
-        <div class="audience-chip" style="--i:3"><svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M4 21V11l8-6 8 6v10" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 21v-6h6v6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Quiosques</span></div>
-        <div class="audience-chip" style="--i:4"><svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M4 9h13a3 3 0 0 1 0 6h-1M4 9v6a4 4 0 0 0 4 4h4a4 4 0 0 0 4-4V9M8 5v2M11 5v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Cafeterias</span></div>
-        <div class="audience-chip" style="--i:5"><svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M3 10 12 3l9 7" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 10v10h14V10" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 20v-6h6v6" stroke="currentColor" stroke-width="1.6"/></svg><span>Pizzarias</span></div>
-        <div class="audience-chip" style="--i:6"><svg class="ico" viewBox="0 0 24 24" fill="none"><rect x="3" y="9" width="18" height="12" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M7 9V6a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v3M7 14h.01M12 14h.01M17 14h.01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Hotéis e Resorts</span></div>
-        <div class="audience-chip" style="--i:7"><svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M4 21V10l8-5 8 5v11" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 21v-5a3 3 0 0 1 6 0v5" stroke="currentColor" stroke-width="1.6"/></svg><span>Eventos</span></div>
-        <div class="audience-chip" style="--i:8"><svg class="ico" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M8 12a4 4 0 0 1 8 0c0 2-1.5 3-4 3s-4-1-4-3Z" stroke="currentColor" stroke-width="1.6"/></svg><span>Lanchonetes</span></div>
-        <div class="audience-chip" style="--i:9"><svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M3 18c2-6 4-10 9-10s7 4 9 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M3 18h18M9 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="1.6"/></svg><span>Clubes e áreas de lazer</span></div>
+      <div class="cc-wrap reveal" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Para quem é a Comanda Beach">
+        <div class="cc-track" id="ccTrack">
+          <div class="audience-chip cc-item"><svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M6 2v8M4 2v4a2 2 0 0 0 4 0V2M8 2v20M18 2c-2 2-2 6-2 8 0 1 1 2 2 2s2-1 2-2V2v20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Restaurantes</span></div>
+          <div class="audience-chip cc-item"><svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M5 3h14l-2 9a5 5 0 0 1-10 0L5 3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 15v6M8 21h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Bares</span></div>
+          <div class="audience-chip cc-item"><svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M2 20c2-2 4-2 6 0s4 2 6 0 4-2 6 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M6 20V9l12-4v15" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Beach Clubs</span></div>
+          <div class="audience-chip cc-item"><svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M4 21V11l8-6 8 6v10" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 21v-6h6v6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Quiosques</span></div>
+          <div class="audience-chip cc-item"><svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M4 9h13a3 3 0 0 1 0 6h-1M4 9v6a4 4 0 0 0 4 4h4a4 4 0 0 0 4-4V9M8 5v2M11 5v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Cafeterias</span></div>
+          <div class="audience-chip cc-item"><svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M3 10 12 3l9 7" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 10v10h14V10" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 20v-6h6v6" stroke="currentColor" stroke-width="1.6"/></svg><span>Pizzarias</span></div>
+          <div class="audience-chip cc-item"><svg class="ico" viewBox="0 0 24 24" fill="none"><rect x="3" y="9" width="18" height="12" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M7 9V6a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v3M7 14h.01M12 14h.01M17 14h.01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Hotéis e Resorts</span></div>
+          <div class="audience-chip cc-item"><svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M4 21V10l8-5 8 5v11" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 21v-5a3 3 0 0 1 6 0v5" stroke="currentColor" stroke-width="1.6"/></svg><span>Eventos</span></div>
+          <div class="audience-chip cc-item"><svg class="ico" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M8 12a4 4 0 0 1 8 0c0 2-1.5 3-4 3s-4-1-4-3Z" stroke="currentColor" stroke-width="1.6"/></svg><span>Lanchonetes</span></div>
+          <div class="audience-chip cc-item"><svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M3 18c2-6 4-10 9-10s7 4 9 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M3 18h18M9 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="1.6"/></svg><span>Clubes e áreas de lazer</span></div>
+        </div>
+        <div class="cc-dots" id="ccDots" role="tablist" aria-label="Selecionar item">
+          <button class="cc-dot" role="tab" aria-label="Item 1"></button>
+          <button class="cc-dot" role="tab" aria-label="Item 2"></button>
+          <button class="cc-dot" role="tab" aria-label="Item 3"></button>
+          <button class="cc-dot" role="tab" aria-label="Item 4"></button>
+          <button class="cc-dot" role="tab" aria-label="Item 5"></button>
+          <button class="cc-dot" role="tab" aria-label="Item 6"></button>
+          <button class="cc-dot" role="tab" aria-label="Item 7"></button>
+          <button class="cc-dot" role="tab" aria-label="Item 8"></button>
+          <button class="cc-dot" role="tab" aria-label="Item 9"></button>
+          <button class="cc-dot" role="tab" aria-label="Item 10"></button>
+        </div>
       </div>
 
       <p class="audience-note reveal">Se sua operação trabalha com pedidos de comida e bebida, a Comanda Beach foi pensada para ajudar você a organizar esse processo.</p>
@@ -1375,6 +1396,63 @@ html{scroll-behavior:smooth}
   menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var ccTrack = document.getElementById('ccTrack');
+  if(ccTrack){
+    var ccWrap = ccTrack.parentElement;
+    var ccItems = Array.prototype.slice.call(ccTrack.querySelectorAll('.cc-item'));
+    var ccDots = Array.prototype.slice.call(document.querySelectorAll('.cc-dot'));
+    var ccN = ccItems.length;
+    var ccActive = 0;
+    var ccAutoplayId = null;
+
+    var ccRender = function(){
+      var spacing = Math.min(150, Math.max(90, ccWrap.clientWidth / 6));
+      var half = Math.floor(ccN / 2);
+      ccItems.forEach(function(item, i){
+        var offset = ((i - ccActive + half + ccN) % ccN) - half;
+        var abs = Math.abs(offset);
+        var x = offset * spacing;
+        var y = abs * 16;
+        var scale = Math.max(1 - abs * 0.14, 0.5);
+        var opacity = Math.max(1 - abs * 0.3, 0);
+        item.style.transform = 'translate(-50%,-50%) translateX(' + x + 'px) translateY(' + y + 'px) scale(' + scale + ')';
+        item.style.opacity = opacity;
+        item.style.zIndex = 100 - abs;
+        item.setAttribute('aria-hidden', abs > 3 ? 'true' : 'false');
+      });
+      ccDots.forEach(function(d, i){
+        var isActive = i === ccActive;
+        d.classList.toggle('is-active', isActive);
+        d.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+    };
+    var ccGoTo = function(i){ ccActive = ((i % ccN) + ccN) % ccN; ccRender(); };
+    var ccStopAutoplay = function(){ if(ccAutoplayId){ clearInterval(ccAutoplayId); ccAutoplayId = null; } };
+    var ccStartAutoplay = function(){
+      if(reduce) return;
+      ccStopAutoplay();
+      ccAutoplayId = setInterval(function(){ ccGoTo(ccActive + 1); }, 3200);
+    };
+    var ccResetAutoplay = function(){ ccStopAutoplay(); ccStartAutoplay(); };
+
+    ccItems.forEach(function(item, i){
+      item.addEventListener('click', function(){ ccGoTo(i); ccResetAutoplay(); });
+    });
+    ccDots.forEach(function(d, i){
+      d.addEventListener('click', function(){ ccGoTo(i); ccResetAutoplay(); });
+    });
+    ccWrap.addEventListener('keydown', function(e){
+      if(e.key === 'ArrowRight'){ ccGoTo(ccActive + 1); ccResetAutoplay(); }
+      if(e.key === 'ArrowLeft'){ ccGoTo(ccActive - 1); ccResetAutoplay(); }
+    });
+    ccWrap.addEventListener('mouseenter', ccStopAutoplay);
+    ccWrap.addEventListener('mouseleave', ccStartAutoplay);
+    window.addEventListener('resize', ccRender, {passive:true});
+
+    ccRender();
+    ccStartAutoplay();
+  }
 
   document.querySelectorAll('.offer-cta, .final-cta .btn').forEach(function(a){
     if(a.getAttribute('href') === '#'){
