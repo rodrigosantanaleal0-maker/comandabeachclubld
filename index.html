@@ -672,6 +672,13 @@ a{color:inherit}
 .bgp{stroke-dasharray:6 14;animation-name:bgp-flow;animation-timing-function:linear;animation-iteration-count:infinite}
 @keyframes bgp-flow{to{stroke-dashoffset:-400}}
 
+/* ============ CONFETTI ============ */
+.confetti-piece{
+  position:fixed;top:0;left:0;width:7px;height:7px;pointer-events:none;z-index:300;
+  animation:confetti-burst 700ms ease-out forwards;
+}
+@keyframes confetti-burst{to{transform:translate(var(--cx),var(--cy)) rotate(var(--cr));opacity:0}}
+
 /* ============ MISC ============ */
 .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .skip-link{
@@ -1291,6 +1298,34 @@ html{scroll-behavior:smooth}
   menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var offerCta = document.querySelector('.offer-cta');
+  if(offerCta && !reduce){
+    var confettiColors = ['#00B8A9','#006B63','#FF5A1F','#FFC9A8','#5FE6D4'];
+    offerCta.addEventListener('click', function(){
+      var rect = offerCta.getBoundingClientRect();
+      var cx = rect.left + rect.width / 2;
+      var cy = rect.bottom;
+      for(var i = 0; i < 22; i++){
+        var piece = document.createElement('span');
+        piece.className = 'confetti-piece';
+        var angle = (Math.random() - 0.5) * 150;
+        var dist = 55 + Math.random() * 65;
+        var rad = angle * Math.PI / 180;
+        var dx = Math.sin(rad) * dist;
+        var dy = -Math.abs(Math.cos(rad)) * dist - Math.random() * 25;
+        piece.style.left = cx + 'px';
+        piece.style.top = cy + 'px';
+        piece.style.background = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+        piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+        piece.style.setProperty('--cx', dx + 'px');
+        piece.style.setProperty('--cy', dy + 'px');
+        piece.style.setProperty('--cr', (Math.random() * 360) + 'deg');
+        document.body.appendChild(piece);
+        (function(node){ setTimeout(function(){ node.remove(); }, 750); })(piece);
+      }
+    });
+  }
 
   var heroTilt = document.querySelector('.hero-visual');
   if(heroTilt && !reduce){
