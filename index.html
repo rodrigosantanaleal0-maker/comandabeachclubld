@@ -665,6 +665,13 @@ a{color:inherit}
 }
 @media (min-width:920px){.sticky-cta{display:none}}
 
+/* ============ BACKGROUND PATHS ============ */
+.paths-bg{position:relative;overflow:hidden}
+.paths-bg > .wrap{position:relative;z-index:1}
+.bg-paths{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.bgp{stroke-dasharray:6 14;animation-name:bgp-flow;animation-timing-function:linear;animation-iteration-count:infinite}
+@keyframes bgp-flow{to{stroke-dashoffset:-400}}
+
 /* ============ MISC ============ */
 .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .skip-link{
@@ -774,7 +781,31 @@ html{scroll-behavior:smooth}
   </section>
 
   <!-- PROBLEMA -->
-  <section class="section section-tint">
+  <section class="section section-tint paths-bg">
+    <svg class="bg-paths" viewBox="0 0 800 400" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M-100 -40 C150 120, 500 260, 900 40" stroke="var(--gold)" stroke-width="0.60" fill="none" opacity="0.100" class="bgp" style="animation-duration:22.0s;animation-delay:0.0s"/>
+      <path d="M-100 -20 C150 111, 500 266, 900 29" stroke="var(--teal)" stroke-width="0.65" fill="none" opacity="0.115" class="bgp" style="animation-duration:24.4s;animation-delay:-1.7s"/>
+      <path d="M-100 0 C150 102, 500 272, 900 18" stroke="var(--teal)" stroke-width="0.70" fill="none" opacity="0.130" class="bgp" style="animation-duration:26.8s;animation-delay:-3.4s"/>
+      <path d="M-100 20 C150 93, 500 278, 900 7" stroke="var(--teal)" stroke-width="0.75" fill="none" opacity="0.145" class="bgp" style="animation-duration:29.2s;animation-delay:-5.1s"/>
+      <path d="M-100 40 C150 84, 500 284, 900 -4" stroke="var(--teal)" stroke-width="0.80" fill="none" opacity="0.160" class="bgp" style="animation-duration:31.6s;animation-delay:-6.8s"/>
+      <path d="M-100 60 C150 75, 500 290, 900 -15" stroke="var(--teal)" stroke-width="0.85" fill="none" opacity="0.175" class="bgp" style="animation-duration:34.0s;animation-delay:-8.5s"/>
+      <path d="M-100 80 C150 66, 500 296, 900 -26" stroke="var(--teal)" stroke-width="0.90" fill="none" opacity="0.100" class="bgp" style="animation-duration:36.4s;animation-delay:-10.2s"/>
+      <path d="M-100 100 C150 57, 500 302, 900 -37" stroke="var(--teal)" stroke-width="0.95" fill="none" opacity="0.115" class="bgp" style="animation-duration:22.0s;animation-delay:-11.9s"/>
+      <path d="M-100 120 C150 48, 500 308, 900 -48" stroke="var(--teal)" stroke-width="1.00" fill="none" opacity="0.130" class="bgp" style="animation-duration:24.4s;animation-delay:-13.6s"/>
+      <path d="M-100 140 C150 39, 500 314, 900 -59" stroke="var(--gold)" stroke-width="1.05" fill="none" opacity="0.145" class="bgp" style="animation-duration:26.8s;animation-delay:-15.3s"/>
+      <path d="M-100 160 C150 30, 500 320, 900 -70" stroke="var(--teal)" stroke-width="1.10" fill="none" opacity="0.160" class="bgp" style="animation-duration:29.2s;animation-delay:-17.0s"/>
+      <path d="M-100 180 C150 21, 500 326, 900 -81" stroke="var(--teal)" stroke-width="1.15" fill="none" opacity="0.175" class="bgp" style="animation-duration:31.6s;animation-delay:-18.7s"/>
+      <path d="M-100 200 C150 12, 500 332, 900 -92" stroke="var(--teal)" stroke-width="1.20" fill="none" opacity="0.100" class="bgp" style="animation-duration:34.0s;animation-delay:-20.4s"/>
+      <path d="M-100 220 C150 3, 500 338, 900 -103" stroke="var(--teal)" stroke-width="1.25" fill="none" opacity="0.115" class="bgp" style="animation-duration:36.4s;animation-delay:-22.1s"/>
+      <path d="M-100 240 C150 -6, 500 344, 900 -114" stroke="var(--teal)" stroke-width="1.30" fill="none" opacity="0.130" class="bgp" style="animation-duration:22.0s;animation-delay:-23.8s"/>
+      <path d="M-100 260 C150 -15, 500 350, 900 -125" stroke="var(--teal)" stroke-width="1.35" fill="none" opacity="0.145" class="bgp" style="animation-duration:24.4s;animation-delay:-25.5s"/>
+      <path d="M-100 280 C150 -24, 500 356, 900 -136" stroke="var(--teal)" stroke-width="1.40" fill="none" opacity="0.160" class="bgp" style="animation-duration:26.8s;animation-delay:-1.2s"/>
+      <path d="M-100 300 C150 -33, 500 362, 900 -147" stroke="var(--teal)" stroke-width="1.45" fill="none" opacity="0.175" class="bgp" style="animation-duration:29.2s;animation-delay:-2.9s"/>
+      <path d="M-100 320 C150 -42, 500 368, 900 -158" stroke="var(--gold)" stroke-width="1.50" fill="none" opacity="0.100" class="bgp" style="animation-duration:31.6s;animation-delay:-4.6s"/>
+      <path d="M-100 340 C150 -51, 500 374, 900 -169" stroke="var(--teal)" stroke-width="1.55" fill="none" opacity="0.115" class="bgp" style="animation-duration:34.0s;animation-delay:-6.3s"/>
+      <path d="M-100 360 C150 -60, 500 380, 900 -180" stroke="var(--teal)" stroke-width="1.60" fill="none" opacity="0.130" class="bgp" style="animation-duration:36.4s;animation-delay:-8.0s"/>
+      <path d="M-100 380 C150 -69, 500 386, 900 -191" stroke="var(--teal)" stroke-width="1.65" fill="none" opacity="0.145" class="bgp" style="animation-duration:22.0s;animation-delay:-9.7s"/>
+    </svg>
     <div class="wrap">
       <div class="section-head reveal">
         <span class="eyebrow">O desafio</span>
